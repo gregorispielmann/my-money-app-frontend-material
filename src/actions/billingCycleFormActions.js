@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-import { push } from 'react-router-redux'
-
 import { toastr } from 'react-redux-toastr'
-import { reset as resetForm } from 'redux-form'
+import { reset as resetForm, setSubmitSucceeded } from 'redux-form'
 import { getList } from '../actions/billingCycleActions'
 
 const BASE_URL = 'http://localhost:3001/api'
@@ -17,7 +15,7 @@ export function create(values){
                 dispatch([
                     resetForm('billingCycleForm'),
                     getList(),
-                    push('/billingCycle')
+                    setSubmitSucceeded(),
                 ])
             }
         )
