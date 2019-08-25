@@ -7,28 +7,58 @@ import CardTable from '../common/widgets/CardTable'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { Redirect } from 'react-router-dom'
+
 import { getList } from '../actions/billingCycleActions.js'
 
 class BillingCycle extends Component {
+
+    state = {
+        redirect: false,
+        item: ''
+    }
 
     componentDidMount() {
         this.props.getList()
     }
 
-    renderRows(){
+render() {
+
+    const renderRows = () => {
+
         const list = this.props.list || []
         return list.map( item => (
-            <tr key={`tr+${item._id}`}>
+            <tr key={item._id}>
                 <td>{item.name}</td>
                 <td>{item.month}</td>
                 <td>{item.year}</td>
+                <td>
+                    <button className='btn btn-warning' onClick={() => {
+                        return this.setState({
+                        item: item,
+                        redirect: true
+                            })}
+                        }
+                        >
+                        <i className='material-icons'>edit</i>
+                    </button>
+                    <button className='btn btn-danger'>
+                        <i className='material-icons'>delete</i>
+                    </button>
+                </td>
             </tr>       
         )
     )
     }
 
-render() {
-
+    if(this.state.redirect) {
+        return <Redirect
+        to={{
+          pathname: "/billing-cycle-form",
+          data: { item: this.state.item }
+        }}
+        ></Redirect>
+    }
 
     return(
         <React.Fragment>
@@ -41,7 +71,7 @@ render() {
         <Content>
             <div className="col-md-12">
                 <CardTable title="Lista" color="primary">
-                {this.renderRows()}
+                {renderRows()}
                 </CardTable>
             </div>
         </Content>
@@ -56,6 +86,7 @@ render() {
 const mapStateToProps = state => ({
     list: state.billingCycle.list
 })
+
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getList }, dispatch)
 

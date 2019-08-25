@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, setSubmitFailed } from 'redux-form'
 import { connect } from 'react-redux'
-import { create } from '../actions/billingCycleFormActions'
+import { create, editForm } from '../actions/billingCycleFormActions'
 import { bindActionCreators } from 'redux';
 
 import Content from '../common/Content'
@@ -18,13 +18,20 @@ class BillingCycleForm extends Component {
 
 render() {
 
+    setSubmitFailed('billingCycleForm')
+
+    const data = this.props.location.data || ''
+    if(data) { editForm(data.item) }
+
     const { handleSubmit } = this.props
 
+    console.log(this.props.submitSucceeded, this.props.submitFailed)
+
     // em caso de envio com sucesso seta flag true e redireciona
-    if(this.props.submitSucceeded) { 
+    if(this.props.submitSucceeded){ 
         return <Redirect to='/billing-cycle'></Redirect>
     }
-
+    
     return(
         
         <React.Fragment>
@@ -45,7 +52,7 @@ render() {
                     <FormButton color="primary" type='submit' label="Salvar"></FormButton>
                 </CardForm>
             </div>
-            <div className="col-md-6">
+{ /*            <div className="col-md-6">
                 <CardForm title="Cadastro de Débitos" color="danger">
                     <Field name='name' component={FormInput}
                     size='4' label='Nome' type='text'
@@ -58,7 +65,7 @@ render() {
                     ></Field>
                     <FormButton color="danger"  type='submit' label="Salvar"></FormButton>
                 </CardForm>
-            </div>
+            </div> */}
         </Content>
         </form>
     </React.Fragment>
@@ -69,8 +76,8 @@ render() {
 }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ create }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ create, editForm }, dispatch)
 
 const element = connect(null, mapDispatchToProps)(BillingCycleForm)
 
-export default reduxForm({form: 'billingCycleForm'})(element)
+export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false})(element)
