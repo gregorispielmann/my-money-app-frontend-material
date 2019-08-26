@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { reduxForm, Field, setSubmitFailed } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { create, editForm } from '../actions/billingCycleFormActions'
 import { bindActionCreators } from 'redux';
@@ -18,17 +18,13 @@ class BillingCycleForm extends Component {
 
 render() {
 
-    setSubmitFailed('billingCycleForm')
-
     const data = this.props.location.data || ''
     if(data) { editForm(data.item) }
 
     const { handleSubmit } = this.props
 
-    console.log(this.props.submitSucceeded, this.props.submitFailed)
-
     // em caso de envio com sucesso seta flag true e redireciona
-    if(this.props.submitSucceeded){ 
+    if(this.props.submitting){ 
         return <Redirect to='/billing-cycle'></Redirect>
     }
     
