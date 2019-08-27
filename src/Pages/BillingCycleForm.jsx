@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { create, editForm } from '../actions/billingCycleFormActions'
+import { create } from '../actions/billingCycleFormActions'
 import { bindActionCreators } from 'redux';
 
 import Content from '../common/Content'
@@ -13,13 +13,9 @@ import FormButton from '../common/widgets/FormWidgets/FormButton'
 
 import { Redirect } from 'react-router-dom'
 
-
 class BillingCycleForm extends Component {
-
+    
 render() {
-
-    const data = this.props.location.data || ''
-    if(data) { editForm(data.item) }
 
     const { handleSubmit } = this.props
 
@@ -48,6 +44,7 @@ render() {
                     <FormButton color="primary" type='submit' label="Salvar"></FormButton>
                 </CardForm>
             </div>
+            <div className="col-md-6"></div>
 { /*            <div className="col-md-6">
                 <CardForm title="Cadastro de Débitos" color="danger">
                     <Field name='name' component={FormInput}
@@ -72,8 +69,12 @@ render() {
 }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ create, editForm }, dispatch)
+const mapStateToProps = state => ({
+    initialValues: { billingCycleForm: state.billingCycle.item } 
+})
 
-const element = connect(null, mapDispatchToProps)(BillingCycleForm)
+const mapDispatchToProps = dispatch => bindActionCreators({ create }, dispatch)
 
-export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false})(element)
+const element = connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
+
+export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false, enableReinitialize: true})(element)

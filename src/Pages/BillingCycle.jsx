@@ -9,13 +9,12 @@ import { bindActionCreators } from 'redux'
 
 import { Redirect } from 'react-router-dom'
 
-import { getList } from '../actions/billingCycleActions.js'
+import { getList, editItem } from '../actions/billingCycleActions.js'
 
 class BillingCycle extends Component {
 
     state = {
         redirect: false,
-        item: ''
     }
 
     componentDidMount() {
@@ -34,8 +33,9 @@ render() {
                 <td>{item.year}</td>
                 <td>
                     <button className='btn btn-warning' onClick={() => {
+                        console.log('Item no onclick ', item)
+                        this.props.editItem(item)
                         return this.setState({
-                        item: item,
                         redirect: true
                             })}
                         }
@@ -55,7 +55,6 @@ render() {
         return <Redirect
         to={{
           pathname: "/billing-cycle-form",
-          data: { item: this.state.item }
         }}
         ></Redirect>
     }
@@ -84,10 +83,11 @@ render() {
 }
 
 const mapStateToProps = state => ({
-    list: state.billingCycle.list
+    list: state.billingCycle.list,
+    item: state.billingCycle.item
 })
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getList }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getList, editItem}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle)

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { toastr } from 'react-redux-toastr'
-import { reset as resetForm, initialize, setSubmitFailed, startSubmit, stopSubmit } from 'redux-form'
+import { reset as resetForm, startSubmit, stopSubmit } from 'redux-form'
 import { getList } from '../actions/billingCycleActions'
 
 const BASE_URL = 'http://localhost:3001/api'
@@ -23,17 +23,19 @@ export function create(values){
             }
         )
         .catch(e => {
-            if(e.response.status === 500){
-                setSubmitFailed('billingCycleForm')
-            }
+            // if(e.response.status === 500){
+            //     setSubmitFailed('billingCycleForm')
+            // }
             e.response.data.errors.forEach(error => toastr.error('Erro', error))
         })
     }
 
 }
 
-export function editForm(item){
-    return dispatch => {
-        initialize('billingCycleForm', item)
+export function loadItem(){
+    console.log('entrou no load item action')
+    return{
+            type: 'LOAD',
+            payload: null
+        }
     }
-}
