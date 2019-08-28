@@ -32,10 +32,9 @@ export function create(values){
 
 }
 
-export function loadItem(){
-    console.log('entrou no load item action')
-    return{
-            type: 'LOAD',
-            payload: null
-        }
-    }
+// export function loadItem(data){
+//     return {
+//             type: 'LOAD',
+//             payload: data
+//         }
+//     }

@@ -14,16 +14,26 @@ import FormButton from '../common/widgets/FormWidgets/FormButton'
 import { Redirect } from 'react-router-dom'
 
 class BillingCycleForm extends Component {
-    
+
+    // componentDidMount(){
+    //     if(this.props.item){
+    //         loadItem(this.props.item)
+    //     }
+    // }
+
 render() {
 
-    const { handleSubmit } = this.props
+    // if(this.props.item){
+    //     loadItem(this.props.item)
+    // }
+
+    const { handleSubmit, pristine, submitting, reset } = this.props
 
     // em caso de envio com sucesso seta flag true e redireciona
     if(this.props.submitting){ 
         return <Redirect to='/billing-cycle'></Redirect>
     }
-    
+
     return(
         
         <React.Fragment>
@@ -41,7 +51,8 @@ render() {
                     <Field name='year' component={FormInput}
                         size='4' label='Ano' type='number' max='2100' min='1970'
                     ></Field>
-                    <FormButton color="primary" type='submit' label="Salvar"></FormButton>
+                    <FormButton color="primary" type='submit' label="Salvar" disabled={pristine || submitting}></FormButton>
+                    <FormButton color="secondary ml-2" type='reset' onClick={() => reset()} label="Cancelar" disabled={pristine || submitting}></FormButton>
                 </CardForm>
             </div>
             <div className="col-md-6"></div>
@@ -70,11 +81,11 @@ render() {
 }
 
 const mapStateToProps = state => ({
-    initialValues: { billingCycleForm: state.billingCycle.item } 
+    initialValues: state.billingCycle.item,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ create }, dispatch)
 
-const element = connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
+BillingCycleForm = connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
 
-export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false, enableReinitialize: true})(element)
+export default reduxForm({form: 'billingCycleForm', enableReinitialize: true, destroyOnUnmount: false})(BillingCycleForm)

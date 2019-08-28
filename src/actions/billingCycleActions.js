@@ -13,7 +13,7 @@ export function getList(){
 }
 
 export function editItem(item){
-    console.log('item no action creator ', item)
+    // console.log('item no action creator ', item)
     return{
         type: 'EDIT_ITEM',
         payload: item

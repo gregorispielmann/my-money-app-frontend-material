@@ -33,7 +33,7 @@ render() {
                 <td>{item.year}</td>
                 <td>
                     <button className='btn btn-warning' onClick={() => {
-                        console.log('Item no onclick ', item)
+                        // console.log('Item no onclick ', item)
                         this.props.editItem(item)
                         return this.setState({
                         redirect: true
