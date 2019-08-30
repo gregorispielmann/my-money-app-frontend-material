@@ -32,9 +32,15 @@ export function create(values){
 
 }
 
-// export function loadItem(data){
-//     return {
-//             type: 'LOAD',
-//             payload: data
-//         }
-//     }
+export function loadItem(data) {
+    return {
+            type: 'LOAD',
+            payload: data
+        }
+    }
+
+export function clear(){
+    return{
+        type: 'CLEAR'
+    }
+}

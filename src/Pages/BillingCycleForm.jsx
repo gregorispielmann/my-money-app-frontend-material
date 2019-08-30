@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { create } from '../actions/billingCycleFormActions'
 import { bindActionCreators } from 'redux';
+
+//actions
+import { create, loadItem } from '../actions/billingCycleFormActions'
 
 import Content from '../common/Content'
 import ContentHeader from '../common/ContentHeader'
@@ -15,17 +17,11 @@ import { Redirect } from 'react-router-dom'
 
 class BillingCycleForm extends Component {
 
-    // componentDidMount(){
-    //     if(this.props.item){
-    //         loadItem(this.props.item)
-    //     }
-    // }
+    componentDidMount(){
+        this.props.loadItem(this.props.item)
+    }
 
 render() {
-
-    // if(this.props.item){
-    //     loadItem(this.props.item)
-    // }
 
     const { handleSubmit, pristine, submitting, reset } = this.props
 
@@ -35,7 +31,7 @@ render() {
     }
 
     return(
-        
+
         <React.Fragment>
         <form onSubmit={handleSubmit(this.props.create)}>
         <ContentHeader title="Ciclos de Pagamento"></ContentHeader>
@@ -51,8 +47,9 @@ render() {
                     <Field name='year' component={FormInput}
                         size='4' label='Ano' type='number' max='2100' min='1970'
                     ></Field>
+
                     <FormButton color="primary" type='submit' label="Salvar" disabled={pristine || submitting}></FormButton>
-                    <FormButton color="secondary ml-2" type='reset' onClick={() => reset()} label="Cancelar" disabled={pristine || submitting}></FormButton>
+                    <FormButton color="secondary ml-2" type='button' onClick={() => reset('billingCycleForm')}  disabled={pristine || submitting} label="Cancelar"></FormButton>
                 </CardForm>
             </div>
             <div className="col-md-6"></div>
@@ -75,17 +72,16 @@ render() {
     </React.Fragment>
 
     )
-
-
 }
 }
 
 const mapStateToProps = state => ({
-    initialValues: state.billingCycle.item,
+    item: state.billingCycle.item,
+    initialValues: state.billingCycleForm.data
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ create }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ loadItem, create }, dispatch)
 
 BillingCycleForm = connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
 
-export default reduxForm({form: 'billingCycleForm', enableReinitialize: true, destroyOnUnmount: false})(BillingCycleForm)
+export default reduxForm({form: 'billingCycleForm'})(BillingCycleForm)
