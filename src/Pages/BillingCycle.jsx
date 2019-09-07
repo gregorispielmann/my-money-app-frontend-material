@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 
 import { Redirect } from 'react-router-dom'
 
-import { getList, editItem } from '../actions/billingCycleActions.js'
+import { getList, editItem, clearItem, removeItem } from '../actions/billingCycleActions.js'
 
 class BillingCycle extends Component {
 
@@ -42,7 +42,9 @@ render() {
                         >
                         <i className='material-icons'>edit</i>
                     </button>
-                    <button className='btn btn-danger'>
+                    <button className='btn btn-danger' onClick={ () => {
+                        this.props.removeItem(item)
+                    }}>
                         <i className='material-icons'>delete</i>
                     </button>
                 </td>
@@ -64,7 +66,7 @@ render() {
         <ContentHeader title="Ciclos de Pagamento"></ContentHeader>
         <a href="/#/billing-cycle-form">
             <button type="button" className="btn btn-success btn-md">
-                <i className="material-icons">add</i>Incluir
+                <i className="material-icons" onClick={clearItem}>add</i>Incluir
             </button>
         </a>
         <Content>
@@ -88,6 +90,6 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getList, editItem }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getList, editItem, removeItem }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle)

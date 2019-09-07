@@ -1,19 +1,19 @@
 import axios from 'axios'
 
 import { toastr } from 'react-redux-toastr'
-import { reset as resetForm, startSubmit, stopSubmit } from 'redux-form'
+import { reset, startSubmit, stopSubmit, initialize } from 'redux-form'
 import { getList } from '../actions/billingCycleActions'
 
 const BASE_URL = 'http://localhost:3001/api'
 
 export function create(values){
-
+    // console.log(values)
     return dispatch => {
         axios.post(`${BASE_URL}/billingCycles/`, values)
         .then(res => {
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
                 dispatch([
-                    resetForm('billingCycleForm'),
+                    reset('billingCycleForm'),
                     getList(),
                     //seta flag true (para renderizar lista)
                     startSubmit('billingCycleForm'),
@@ -23,6 +23,7 @@ export function create(values){
             }
         )
         .catch(e => {
+            console.log(e)
             // if(e.response.status === 500){
             //     setSubmitFailed('billingCycleForm')
             // }
@@ -33,14 +34,20 @@ export function create(values){
 }
 
 export function loadItem(data) {
-    return {
-            type: 'LOAD',
-            payload: data
+    // console.log('data', data)
+    return [
+        initialize('billingCycleForm', data),
+        {
+            type: 'CLEAR_ITEM',
+            payload: null
         }
-    }
+    ]
+}
 
-export function clear(){
-    return{
-        type: 'CLEAR'
+export function handleCancel(){
+    console.log('clicado handlecancel')
+    return dispatch => { dispatch([
+        getList()
+    ])
     }
 }
