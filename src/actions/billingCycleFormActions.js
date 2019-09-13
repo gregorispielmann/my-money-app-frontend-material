@@ -45,9 +45,21 @@ export function loadItem(data) {
 }
 
 export function handleCancel(){
-    console.log('clicado handlecancel')
-    return dispatch => { dispatch([
-        getList()
-    ])
-    }
+    return dispatch => [
+    toastr.confirm(
+        `Deseja mesmo cancelar?`,
+        {
+            okText: 'Sim',
+            cancelText: 'Não',
+            onOk: () => {
+            toastr.success('Sucesso', 'Item cancelado com sucesso')
+            dispatch([
+                initialize('billingCycleForm', null),
+                //seta flag true (para renderizar lista)
+                startSubmit('billingCycleForm'),
+            ])},
+            onCancel: () => { return null }
+        }
+    )
+    ]
 }
