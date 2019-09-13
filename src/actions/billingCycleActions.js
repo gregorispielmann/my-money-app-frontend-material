@@ -29,7 +29,7 @@ export function clearItem(){
     }
 }
 
-export function removeItem(item){
+export function removeItem (item) {
     // console.log('Remove item: ',id)
 
     return dispatch => {
@@ -38,21 +38,20 @@ export function removeItem(item){
             {
                 okText: 'Sim',
                 cancelText: 'Cancelar',
-                onOk: () =>
-                axios.delete(
-                    `${BASE_URL}/billingCycles/${item._id}`
-                )
-                .then(dispatch([
-                        toastr.success('Sucesso', 'Item removido com sucesso'),
-                        getList()
-                ]))
-                .catch(e => {
-                    console.log(e)
-                    // if(e.response.status === 500){
-                    //     setSubmitFailed('billingCycleForm')
-                    // }
-                    e.response.data.errors.forEach(error => toastr.error('Erro', error))
-                }),
+                onOk: () => {
+                    toastr.success('Sucesso', `Item "${item.name}" removido com sucesso!`)
+                    axios.delete(
+                        `${BASE_URL}/billingCycles/${item._id}`
+                    )
+                    .then( () => {
+                        dispatch([
+                            this.getList()
+                        ])
+                    })
+                    .catch(e => {
+                        e.response.data.errors.forEach(error => toastr.error('Erro', error))
+                    })
+                },
                 onCancel: () => { return null }
             }
         )
