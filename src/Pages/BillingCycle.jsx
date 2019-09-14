@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 
 import { Redirect } from 'react-router-dom'
 
-import { getList, editItem, clearItem, removeItem } from '../actions/billingCycleActions.js'
+import { getList, editItem, clearUpdateFlag, clearItem, removeItem } from '../actions/billingCycleActions.js'
 
 class BillingCycle extends Component {
 
@@ -19,7 +19,10 @@ class BillingCycle extends Component {
 
     componentDidMount() {
         this.props.getList()
+        // limpa a flag de update
+        this.props.clearUpdateFlag()
     }
+
 
 render() {
 
@@ -35,6 +38,8 @@ render() {
                     <button className='btn btn-warning' onClick={() => {
                         // console.log('Item no onclick ', item)
                         this.props.editItem(item)
+                        // limpa a flag de update
+                        // this.props.clearUpdateFlag()
                         return this.setState({
                         redirect: true
                             })}
@@ -90,6 +95,6 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getList, editItem, removeItem }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getList, editItem, clearUpdateFlag, removeItem }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle)

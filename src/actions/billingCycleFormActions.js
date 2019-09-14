@@ -6,10 +6,12 @@ import { getList } from '../actions/billingCycleActions'
 
 const BASE_URL = 'http://localhost:3001/api'
 
-export function create(values){
-    // console.log(values)
+function submit(values, method){
+    
+    const id = values._id ? values._id : ''
+
     return dispatch => {
-        axios.post(`${BASE_URL}/billingCycles/`, values)
+        axios[method](`${BASE_URL}/billingCycles/${id}`, values)
         .then(res => {
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
                 dispatch([
@@ -18,7 +20,7 @@ export function create(values){
                     //seta flag true (para renderizar lista)
                     startSubmit('billingCycleForm'),
                     //muda flag submitting para false e permite editar itens novamente
-                    stopSubmit('billingCycleForm')
+                    stopSubmit('billingCycleForm'),
                 ])
             }
         )
@@ -30,6 +32,17 @@ export function create(values){
             e.response.data.errors.forEach(error => toastr.error('Erro', error))
         })
     }
+}
+
+export function create(values){
+    // console.log(values)
+    return submit(values,'post')
+
+}
+
+export function update(values){
+    // console.log(values)
+    return submit(values, 'put')
 
 }
 

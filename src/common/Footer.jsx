@@ -15,7 +15,7 @@ export default props => (
           <div className="copyright float-right">
             &copy;
               { new Date().getFullYear() } made with <i className="material-icons">favorite</i> by
-            <a href="https://www.pixeltech.com.br" rel="noopener noreferrer" target="_blank"> Gregori Spielmann</a>.
+            <a href="http://www.pixeltech.com.br" rel="noopener noreferrer" target="_blank"> Gregori Spielmann</a>.
           </div>
             {/* conteudo */}
         </div>

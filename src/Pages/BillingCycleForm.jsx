@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
 //actions
-import { create, loadItem, handleCancel } from '../actions/billingCycleFormActions'
+import { create, update, loadItem, handleCancel } from '../actions/billingCycleFormActions'
 
 import Content from '../common/Content'
 import ContentHeader from '../common/ContentHeader'
@@ -28,18 +28,23 @@ class BillingCycleForm extends Component {
         }
     }
 
+
 render() {
 
-    const { handleSubmit, submitting, create } = this.props
+
+
+    const { handleSubmit, submitting, create, update } = this.props
 
     // em caso de envio com sucesso seta flag true e redireciona
     if(submitting){ 
         return <Redirect to='/billing-cycle'></Redirect>
     }
 
+    // console.log('updateflag form: ',this.props.updateFlag)
+
     return(
         <React.Fragment>
-        <form onSubmit={handleSubmit(create)}>
+        <form onSubmit={this.props.updateFlag ? handleSubmit(update) : handleSubmit(create)}>
         <ContentHeader title="Ciclos de Pagamento"></ContentHeader>
         <Content>
             <div className="col-md-6">
@@ -69,9 +74,10 @@ render() {
 
 const mapStateToProps = state => ({
     item: state.billingCycle.item,
+    updateFlag: state.billingCycle.updateFlag
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ loadItem, create, handleCancel }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ loadItem, create, update, handleCancel }, dispatch)
 
 BillingCycleForm = connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
 

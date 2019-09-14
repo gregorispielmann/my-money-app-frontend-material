@@ -29,6 +29,10 @@ export function clearItem(){
     }
 }
 
+export function clearUpdateFlag(){
+    return { type: 'CLEAR_UPDATE' }
+}
+
 export function removeItem (item) {
     // console.log('Remove item: ',id)
 
