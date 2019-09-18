@@ -2,7 +2,7 @@ import React from 'react'
 
 export default props => (
 
-    <div className="col-lg-3 col-md-6 col-sm-6">
+    <div className="col-lg-4 col-md-6 col-sm-6">
         <div className="card card-stats">
         <div className={`card-header card-header-${props.coloricon} card-header-icon`}>
             <div className="card-icon">

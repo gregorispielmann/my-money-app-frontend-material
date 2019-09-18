@@ -28,7 +28,7 @@ render(){
 
 return (
     <React.Fragment>
-        <ContentHeader title="Dashboard without Redux"></ContentHeader>
+        <ContentHeader title="Dashboard"></ContentHeader>
         <Content>
             <CardDash icon="account_balance" coloricon="warning" title={credit - debit} unity="R$ " category="Total Consolidado"></CardDash>
             <CardDash icon="attach_money" coloricon="primary" title={credit} unity="R$ " category="Créditos"></CardDash>

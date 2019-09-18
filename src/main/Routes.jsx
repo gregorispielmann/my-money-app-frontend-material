@@ -6,15 +6,16 @@ import { HashRouter } from 'react-router-dom'
 import Dashboard from '../Pages/Dashboard2'
 import BillingCycle from '../Pages/BillingCycle'
 import BillingCycleForm from '../Pages/BillingCycleForm'
+import AuthApp from '../main/authApp'
 
 export default props => (
 
     <HashRouter>
         <Switch>
-            <Route exact path="/" component={Dashboard}/>
+            <Route path="/" component={AuthApp}/>
             <Route path="/billing-cycle" component={BillingCycle}/>
             <Route path="/billing-cycle-form" component={BillingCycleForm}/>
-            <Route component={Dashboard}/>
+            <Route path='/dashboard' component={Dashboard}/>
         </Switch>
     </HashRouter>
 

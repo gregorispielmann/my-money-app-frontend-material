@@ -25,7 +25,7 @@ export function editItem(item){
 export function clearItem(){
     return {
         type: 'CLEAR_ITEM',
-        payload: null,
+        payload: {credits: {}, debits: {}},
     }
 }
 
@@ -41,7 +41,7 @@ export function removeItem (item) {
             `Deseja deletar "${item.name}"?`,
             {
                 okText: 'Sim',
-                cancelText: 'Cancelar',
+                cancelText: 'Não',
                 onOk: () => {
                     toastr.success('Sucesso', `Item "${item.name}" removido com sucesso!`)
                     axios.delete(
