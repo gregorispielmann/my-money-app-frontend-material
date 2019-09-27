@@ -9,7 +9,8 @@ import thunk from 'redux-thunk'
 
 import reducers from './main/reducers'
 
-import Main from './main/Main';
+// import Routes from '../src/main/Routes'
+import AuthApp from './main/authApp';
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
                 && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -18,6 +19,6 @@ const store = applyMiddleware(multi, thunk, promise)(createStore)(reducers, devT
 
 ReactDOM.render(
     <Provider store={store}>
-        <Main></Main>
+        <AuthApp></AuthApp>
     </Provider>
     , document.getElementById('root'));

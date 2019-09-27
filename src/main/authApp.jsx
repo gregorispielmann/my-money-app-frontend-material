@@ -3,17 +3,17 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import App from './app'
 import Login from '../Pages/Login'
 
 import { validateToken } from '../auth/authActions'
-
+import App from './app'
+// import BillingCycle from '../Pages/BillingCycle'
 
 class AuthApp extends React.Component{
 
     
     componentDidMount() {
-        if(this.props.user){
+        if(this.props.auth.user){
             this.props.validateToken(this.props.auth.user.token)
         }
     }
@@ -29,6 +29,8 @@ class AuthApp extends React.Component{
         } else {
             return false
         }
+
+        // return <Main></Main>
 
     }
 

@@ -41,8 +41,8 @@ class Login extends React.Component {
             <div className="card-body">
               <form onSubmit={handleSubmit(v => this.onSubmit(v))}>
                 <Field component={InputField} type='input' name='name' placeholder='Nome' hide={loginMode}></Field>
-                <Field component={InputField} type='email' name='email' placeholder='E-mail'></Field>
-                <Field component={InputField} type='password' name='password' placeholder='Senha'></Field>
+                <Field component={InputField} type='email' name='email' required placeholder='E-mail'></Field>
+                <Field component={InputField} type='password' name='password' required placeholder='Senha'></Field>
                 <Field component={InputField} type='password' name='confirm_password' placeholder='Confirmar Senha' hide={loginMode}></Field>
                 <button type="submit" className="btn btn-primary">
                   { loginMode ? 'Entrar' : 'Registrar' } 

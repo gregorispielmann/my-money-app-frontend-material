@@ -5,6 +5,7 @@ import FormInputs from './FormInputs'
 import { bindActionCreators } from 'redux'
 
 import { toastr } from 'react-redux-toastr'
+import FormDropdown from './FormDropdown'
 
 class FormList extends Component {
 
@@ -29,7 +30,7 @@ class FormList extends Component {
                 <td><Field name={`${this.props.listType}[${index}].name`} placeholder='Informe o nome' component={FormInputs}></Field></td>
                 <td><Field name={`${this.props.listType}[${index}].value`} placeholder='Informe o valor' component={FormInputs}></Field></td>
                 {this.props.showStatus ?
-                    <td><Field name={`${this.props.listType}[${index}].status`} placeholder='Status' component={FormInputs}></Field></td>
+                    <td><Field name={`${this.props.listType}[${index}].status`} placeholder='Status' credits={this.props.listType === 'credits'} option={`${this.props.listType}[${index}].status`} component={FormDropdown}></Field></td>
                 : null
                 }
                 <td className='td-actions'>

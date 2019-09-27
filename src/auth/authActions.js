@@ -10,14 +10,12 @@ export function signup(values) {
 }
 
 export function submit(values, url) {
-  console.log(values)
   return dispatch => {
     axios.post(url, values)
       .then(resp => {
         dispatch([{ type: "USER_FETCHED", payload: resp.data }]);
       })
       .catch(e => {
-        console.log(e)
         e.response.data.errors.forEach(error => toastr.error("Erro", error));
       });
   };
@@ -29,9 +27,8 @@ export function logout() {
 
 export function validateToken(token) {
   return dispatch => {
-    if (token) {
-      axios
-        .post(`${consts.OAPI_URL}/validateToken`, { token })
+    if(token) {
+      axios.post(`${consts.OAPI_URL}/validateToken`, { token })
         .then(resp => {
           dispatch({ type: "TOKEN_VALIDATED", payload: resp.data.valid });
         })

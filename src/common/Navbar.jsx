@@ -28,7 +28,7 @@ render(){
       </div>
       <ul className="navbar-nav">
         <li className="nav-item dropdown">
-        <a className="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a className="nav-link" href="/" onClick={(e) => e.preventDefault() } id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span className="">{email}</span>
           <span> | </span>
           <span className="">{name}</span>

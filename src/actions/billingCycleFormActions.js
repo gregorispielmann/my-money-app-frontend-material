@@ -65,7 +65,7 @@ export function handleCancel(){
             okText: 'Sim',
             cancelText: 'Não',
             onOk: () => {
-            toastr.success('Sucesso', 'Item cancelado com sucesso')
+            toastr.success('Sucesso', 'Cancelado com sucesso')
             dispatch([
                 initialize('billingCycleForm', null),
                 //seta flag true (para renderizar lista)

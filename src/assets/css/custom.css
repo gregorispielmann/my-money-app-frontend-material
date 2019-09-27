@@ -6,3 +6,11 @@ div.login {
     /* background: blue; */
     padding-top: 10%;
 }
+
+div.form-group select.form-control.selectpicker{
+    height: 36px;
+}
+
+table.table tbody tr.border-0 td{
+    border: 0;
+}
