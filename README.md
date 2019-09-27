@@ -8,4 +8,4 @@ Projeto feito utilizando para o FrontEnd ReactJS com Redux e Redux-Form
 
 ### Dashboard
 
-Dashboard feito utilizando o template 'Material Dashboard' by Creative Tim - [Documentação](https://www.creative-tim.com/product/material-dashboard)
+Dashboard feito utilizando o template 'Material Dashboard' by Creative Tim - [Documentação](https://www.creative-tim.com/product/material-dashboard)# my-money-app-frontend
